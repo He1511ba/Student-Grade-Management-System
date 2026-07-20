@@ -1,0 +1,72 @@
+#include <iostream>
+
+using namespace std;
+
+const int maxStudrnst = 100;
+const int maxItems = 10;
+
+string names[maxStudrnst];        // number of studuent
+int grads[maxStudrnst][maxItems]; // number of grads for each student
+int gradsCount[maxStudrnst];      // value of grads
+int studentCout = 0;              // number of student
+
+int addstudent()
+{
+    cout << "Entre your name: ";
+    cin >> names[studentCout];
+
+    cout << "Entre the Number of grads:  ";
+    cin >> gradsCount[studentCout];
+
+    cout << "Enter your grades: ";
+    for (int i = 0; i < gradsCount[studentCout]; i++)
+    {
+        cin >> grads[studentCout][i];
+    }
+
+    cout << "\n";
+    studentCout++;
+}
+
+double averge(int index) // index is a index for student
+{
+    double sum = 0;
+
+    for (int i = 0; i < gradsCount[index]; i++)
+    {
+        sum += grads[index][i];
+    }
+
+    return sum / gradsCount[index];
+}
+
+void displayStudents()
+{
+    for (int i = 0; i < studentCout; i++)
+    {
+        cout << "Name: " << names[i] << "\n";
+
+        cout << "Grads: ";
+        for (int j = 0; j < gradsCount[i]; j++)
+        {
+            cout << grads[i][j] << " ";
+        }
+
+        double avg = averge(i);
+
+        cout << "\nAverage: " << avg << "\n";
+
+        if (avg >= 50)
+            cout << "Status: Pass";
+        else
+            cout << "Status: Fail";
+
+        cout << "\n----------------------------------------\n";
+    }
+}
+
+int main()
+{
+    addstudent();
+    displayStudents();
+}
